@@ -1,18 +1,18 @@
-use std::collections::HashSet;
 use clap::Parser;
 use rand::prelude::SliceRandom;
 use rand::Rng;
 use rand_chacha::rand_core::SeedableRng;
-use rug::Integer;
 use rug::ops::Pow;
+use rug::Integer;
+use std::collections::HashSet;
 
 #[derive(Parser)]
 #[command()]
 struct Args {
-    #[arg(short, long, default_value_t=32)]
+    #[arg(short, long, default_value_t = 32)]
     num_keys: u32,
-    #[arg(short, long, default_value_t=128)]
-    key_size: u32
+    #[arg(short, long, default_value_t = 128)]
+    key_size: u32,
 }
 
 fn main() {
@@ -56,7 +56,7 @@ fn gen_map(num_keys: u32, key_size: u32) {
         while bin_repr.len() < key_size as usize {
             bin_repr = "0".to_string() + &*bin_repr;
         }
-        println!("{bin_repr}");
+        println!("  {bin_repr}");
     }
     println!("Keys enum:");
     let mut key_keys = HashSet::new();
@@ -65,6 +65,6 @@ fn gen_map(num_keys: u32, key_size: u32) {
     }
     let key_keys = key_keys.into_iter().collect::<Vec<u32>>();
     for i in 0..keys.len() {
-        println!("    {}: {}", key_keys[i], keys[i]);
+        println!("  {}: {}", key_keys[i], keys[i]);
     }
 }
